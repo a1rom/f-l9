@@ -16,13 +16,14 @@ return new class extends Migration
         Schema::create('suppliers', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('company_code')->unique();
+            $table->unsignedTinyInteger('status')->default(1);
             $table->string('email', 60)->unique();
             $table->string('phone', 30)->unique();
             $table->string('street', 100);
             $table->string('city', 100);
             $table->string('post_code', 12);
             $table->string('country', 100);
-            $table->string('company_code')->unique();
             $table->timestamps();
         });
     }

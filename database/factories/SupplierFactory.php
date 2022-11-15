@@ -18,13 +18,14 @@ class SupplierFactory extends Factory
     {
         return [
             'name' => $this->faker->company,
+            'company_code' => $this->faker->unique()->ein,
+            'status' => $this->faker->numberBetween(0, 1),
             'email' => $this->faker->unique()->safeEmail,
             'phone' => $this->faker->unique()->e164PhoneNumber,
             'street' => $this->faker->streetAddress,
             'city' => $this->faker->city,
             'post_code' => $this->faker->postcode,
             'country' => $this->faker->country,
-            'company_code' => $this->faker->unique()->ein,
         ];
     }
 }
