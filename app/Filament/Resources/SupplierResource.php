@@ -2,12 +2,14 @@
 
 namespace App\Filament\Resources;
 
+use Closure;
 use Filament\Forms;
 use Filament\Tables;
 use App\Models\Supplier;
 use Filament\Resources\Form;
 use Filament\Resources\Table;
 use Filament\Resources\Resource;
+use Illuminate\Database\Eloquent\Model;
 use Filament\Tables\Columns\Layout\Split;
 use Filament\Tables\Columns\Layout\Stack;
 use Illuminate\Database\Eloquent\Builder;
@@ -18,6 +20,8 @@ use App\Filament\Resources\SupplierResource\RelationManagers;
 class SupplierResource extends Resource
 {
     protected static ?string $model = Supplier::class;
+
+    protected static ?string $navigationGroup = 'General';
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
@@ -60,6 +64,7 @@ class SupplierResource extends Resource
             ->columns([
                 Split::make([
                     Tables\Columns\TextColumn::make('id'),
+                    Tables\Columns\TextColumn::make('status'),
                     Stack::make([
                         Tables\Columns\TextColumn::make('name')
                         ->weight('bold')
@@ -114,4 +119,6 @@ class SupplierResource extends Resource
             'edit' => Pages\EditSupplier::route('/{record}/edit'),
         ];
     }
+
+
 }

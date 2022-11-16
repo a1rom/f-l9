@@ -7,6 +7,14 @@ module.exports = {
         './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
+        './app/Filament/**/*.php'
+    ],
+    safelist: [
+        'border-green-600',
+        'border-l-2',
+        'border-orange-600',
+        'dark:border-orange-300',
+        'opacity-30',
     ],
 
     theme: {
