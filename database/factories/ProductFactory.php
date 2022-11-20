@@ -17,7 +17,7 @@ class ProductFactory extends Factory
     public function definition()
     {
         return [
-            'name' => fake()->name(),
+            'name' => fake()->catchPhrase(),
             'product_category_id' => fake()->numberBetween(1, 5),
             'sku' => fake()->unique()->numerify('SKU-#######'),
             'ean' => fake()->unique()->ean13(),
