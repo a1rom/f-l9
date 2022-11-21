@@ -4,6 +4,7 @@ namespace App\Filament\Resources\SupplierResource\Pages;
 
 use Closure;
 use Filament\Pages\Actions;
+use Filament\Tables\Filters\Layout;
 use Illuminate\Database\Eloquent\Model;
 use Filament\Resources\Pages\ListRecords;
 use App\Filament\Resources\SupplierResource;
@@ -31,4 +32,6 @@ class ListSuppliers extends ListRecords
             default => null,
         };
     }
+
+
 }

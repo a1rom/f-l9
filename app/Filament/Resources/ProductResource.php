@@ -2,16 +2,19 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\ProductResource\Pages;
-use App\Filament\Resources\ProductResource\RelationManagers;
-use App\Models\Product;
 use Filament\Forms;
-use Filament\Resources\Form;
-use Filament\Resources\Resource;
-use Filament\Resources\Table;
 use Filament\Tables;
+use App\Models\Product;
+use Filament\Resources\Form;
+use Filament\Resources\Table;
+use Filament\Resources\Resource;
+use Filament\Tables\Filters\Filter;
+use Filament\Tables\Filters\Layout;
+use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
+use App\Filament\Resources\ProductResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\ProductResource\RelationManagers;
 
 class ProductResource extends Resource
 {
@@ -55,7 +58,9 @@ class ProductResource extends Resource
                 Tables\Columns\TextColumn::make('name')
                     ->sortable()
                     ->searchable(),
-                Tables\Columns\TextColumn::make('productCategory.name'),
+                Tables\Columns\TextColumn::make('productCategory.name')
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('sku')
                     ->sortable()
                     ->searchable(),
@@ -67,7 +72,10 @@ class ProductResource extends Resource
                 Tables\Columns\TextColumn::make('updated_at'),
             ])
             ->filters([
-                //
+                SelectFilter::make('category')
+                    ->label('Category')
+                    ->relationship('productCategory', 'name')
+                    ->indicator('Product Category'),
             ])
             ->actions([
                 // Tables\Actions\ViewAction::make(),
@@ -94,4 +102,10 @@ class ProductResource extends Resource
             'edit' => Pages\EditProduct::route('/{record}/edit'),
         ];
     }
+
+    public function getTableFiltersLayout(): ?string
+    {
+        return Layout::AboveContent;
+    }
+
 }
