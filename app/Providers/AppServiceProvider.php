@@ -38,6 +38,7 @@ class AppServiceProvider extends ServiceProvider
                 //     ->icon('heroicon-s-cog')
                 //     ->collapsed(),
             ]);
+            Filament::registerViteTheme('resources/css/app.css');
         });
     }
 }
