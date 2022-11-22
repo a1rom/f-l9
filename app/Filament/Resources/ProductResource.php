@@ -73,7 +73,7 @@ class ProductResource extends Resource
                     ->label('Category')
                     ->relationship('productCategory', 'name')
                     ->indicator('Product Category'),
-            ])
+            ], Layout::AboveContent)
             ->actions([
                 // Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
