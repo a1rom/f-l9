@@ -1,8 +1,12 @@
-// Import our custom CSS
-import '../sass/app.scss'
+import Alpine from 'alpinejs'
+import Focus from '@alpinejs/focus'
+import FormsAlpinePlugin from '../../vendor/filament/forms/dist/module.esm'
+import NotificationsAlpinePlugin from '../../vendor/filament/notifications/dist/module.esm'
 
-// Import all of Bootstrap's JS
-import * as bootstrap from 'bootstrap'
+Alpine.plugin(Focus)
+Alpine.plugin(FormsAlpinePlugin)
+Alpine.plugin(NotificationsAlpinePlugin)
 
-// before code:
-// import './bootstrap';
+window.Alpine = Alpine
+
+Alpine.start()
