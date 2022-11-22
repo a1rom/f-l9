@@ -57,16 +57,13 @@ class ProductResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('name')
                     ->sortable()
-                    ->searchable(),
+                    ->searchable(isIndividual: true),
                 Tables\Columns\TextColumn::make('productCategory.name')
-                    ->sortable()
-                    ->searchable(),
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('sku')
-                    ->sortable()
-                    ->searchable(),
+                    ->searchable(isIndividual: true),
                 Tables\Columns\TextColumn::make('ean')
-                    ->sortable()
-                    ->searchable(),
+                    ->searchable(isIndividual: true),
                 Tables\Columns\TextColumn::make('description'),
                 Tables\Columns\TextColumn::make('created_at'),
                 Tables\Columns\TextColumn::make('updated_at'),
@@ -102,10 +99,4 @@ class ProductResource extends Resource
             'edit' => Pages\EditProduct::route('/{record}/edit'),
         ];
     }
-
-    public function getTableFiltersLayout(): ?string
-    {
-        return Layout::AboveContent;
-    }
-
 }

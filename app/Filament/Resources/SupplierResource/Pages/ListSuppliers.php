@@ -23,15 +23,8 @@ class ListSuppliers extends ListRecords
     protected function getTableRecordClassesUsing(): ?Closure
     {
         return fn (Model $record) => match ($record->status) {
-            'n' => 'opacity-30',
-            0 => [
-                'border-l-2 border-orange-600',
-                'dark:border-orange-300' => config('tables.dark_mode'),
-            ],
-            1 => 'border-l-2 border-green-600',
+            0 => 'opacity-25',
             default => null,
         };
     }
-
-
 }
