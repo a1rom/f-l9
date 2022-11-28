@@ -32,8 +32,8 @@ class Purchase extends Model
         return $this->belongsTo(Product::class);
     }
 
-    public function vat()
-    {
-        return $this->belongsTo(Vat::class);
-    }
+    // public function vat()
+    // {
+    //     return $this->belongsTo(Vat::class);
+    // }
 }

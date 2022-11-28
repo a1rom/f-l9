@@ -37,13 +37,13 @@ class PurchaseResource extends Resource
                 Tables\Columns\TextColumn::make('date')
                     ->sortable()
                     ->searchable(),
-                Tables\Columns\TextColumn::make('supplier_id'),
-                Tables\Columns\TextColumn::make('product_id'),
+                Tables\Columns\TextColumn::make('supplier.name'),
+                Tables\Columns\TextColumn::make('product.name'),
                 Tables\Columns\TextColumn::make('quantity'),
                 Tables\Columns\TextColumn::make('price_vat_excl'),
                 Tables\Columns\TextColumn::make('total_vat'),
                 Tables\Columns\TextColumn::make('vat_id'),
-                Tables\Columns\TextColumn::make('user_id'),
+                Tables\Columns\TextColumn::make('user.name'),
                 Tables\Columns\TextColumn::make('created_at'),
                 Tables\Columns\TextColumn::make('updated_at'),
             ])
