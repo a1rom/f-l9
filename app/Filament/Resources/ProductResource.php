@@ -28,21 +28,21 @@ class ProductResource extends Resource
     {
         return $form
             ->schema([
-                forms\Components\TextInput::make('name')
+                Forms\Components\TextInput::make('name')
                     ->required()
                     ->unique()
                     ->maxLength(191),
-                forms\Components\TextInput::make('sku')
+                Forms\Components\TextInput::make('sku')
                     ->required()
                     ->unique()
                     ->maxLength(18),
-                forms\Components\TextInput::make('ean')
+                Forms\Components\TextInput::make('ean')
                     ->required()
                     ->unique()
                     ->maxLength(13),
-                forms\Components\Textarea::make('description')
+                Forms\Components\Textarea::make('description')
                     ->maxLength(65535),
-                forms\Components\Select::make('product_category_id')
+                Forms\Components\Select::make('product_category_id')
                     ->relationship('productCategory', 'name')
                     ->required(),
             ]);
