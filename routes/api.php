@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MyController;
 use App\Http\Controllers\Api\GetProductsController;
+use App\Http\Middleware\Api\EnsureTokenIsValid;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +23,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get($apiVer . '/products', [GetProductsController::class, 'index']);
+Route::get($apiVer . '/products', [GetProductsController::class, 'index'])
+    ->middleware(EnsureTokenIsValid::class);
 
 // testing router only, should be deleted
 Route::post('/my', MyController::class);
