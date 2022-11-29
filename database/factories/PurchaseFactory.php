@@ -23,6 +23,8 @@ class PurchaseFactory extends Factory
             'date' => fake()->date(),
             'supplier_id' => fake()->numberBetween(1, 10),
             'user_id' => fake()->numberBetween(1, 10),
+            'vat_id' => fake()->numberBetween(1, 10),
+            'total_vat' => fake()->randomFloat(2, 1, 100),
         ];
     }
 }

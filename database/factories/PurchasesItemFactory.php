@@ -16,19 +16,11 @@ class PurchasesItemFactory extends Factory
      */
     public function definition()
     {
-        $qty = fake()->numberBetween(1, 100);
-        $priceVatExcl = fake()->randomFloat(2, 1, 60);
-        $vatRate = fake()->numberBetween(19, 23);
-        $totalVatExcl = $qty * $priceVatExcl;
-        $totalVat = $totalVatExcl * (1 + $vatRate / 100) - $totalVatExcl;
-
         return [
             'purchase_id' => fake()->numberBetween(1, 10),
             'product_id' => fake()->numberBetween(1, 10),
-            'quantity' => $qty,
-            'price_vat_excl' => $priceVatExcl,
-            'total_vat' => $totalVat,
-            'vat_id' => fake()->numberBetween(1, 5),
+            'quantity' => fake()->numberBetween(1, 100),
+            'price_vat_excl' => fake()->randomFloat(2, 1, 60),
         ];
     }
 }

@@ -14,26 +14,13 @@ class Purchase extends Model
     protected $fillable = [
         'date',
         'supplier_id',
-        'product_id',
-        'quantity',
-        'price_vat_excl',
-        'total_vat',
-        'vat_id',
         'user_id',
+        'vat_id',
+        'total_vat',
     ];
 
     public function supplier()
     {
         return $this->belongsTo(Supplier::class);
     }
-
-    public function product()
-    {
-        return $this->belongsTo(Product::class);
-    }
-
-    // public function vat()
-    // {
-    //     return $this->belongsTo(Vat::class);
-    // }
 }

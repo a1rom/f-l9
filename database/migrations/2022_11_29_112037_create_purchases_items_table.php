@@ -19,8 +19,6 @@ return new class extends Migration
             $table->foreignId('product_id')->constrained();
             $table->integer('quantity');
             $table->decimal('price_vat_excl', 8, 2);
-            $table->decimal('total_vat', 8, 2);
-            $table->foreignId('vat_id')->constrained();
             $table->timestamps();
         });
     }

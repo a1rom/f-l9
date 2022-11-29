@@ -18,6 +18,8 @@ return new class extends Migration
             $table->date('date');
             $table->foreignId('supplier_id')->constrained();
             $table->foreignId('user_id')->constrained();
+            $table->foreignId('vat_id')->constrained();
+            $table->float('total_vat', 8, 2);
             $table->timestamps();
         });
     }
