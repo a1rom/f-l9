@@ -15,8 +15,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+$apiVer = config('app.api_version');
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get($apiVer . '/products', [GetProductsController::class, 'index']);
+
+// testing router only, should be deleted
 Route::post('/my', MyController::class);
+
+//
