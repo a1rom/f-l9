@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\MyController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MyController;
+use App\Http\Controllers\Api\GetProductsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-$apiVer = config('app.api_version');
+$apiVer = config('my.api_version');
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
