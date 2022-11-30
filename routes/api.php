@@ -17,14 +17,15 @@ use App\Http\Middleware\Api\EnsureTokenIsValid;
 |
 */
 
-$apiVer = config('my.api_version');
-
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get($apiVer . '/products', [GetProductsController::class, 'index'])
-    ->middleware(EnsureTokenIsValid::class);
+Route::middleware(EnsureTokenIsValid::class)->group(function (){
+    Route::prefix(config('my.api_version'))->group(function () {
+        Route::get('/products', [GetProductsController::class, 'index']);
+    });
+});
 
 // testing router only, should be deleted
 Route::post('/my', MyController::class);
