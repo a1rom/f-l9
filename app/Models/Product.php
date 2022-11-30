@@ -17,6 +17,10 @@ class Product extends Model
         'description',
     ];
 
+    protected $with = [
+        'productCategory',
+    ];
+
     public function productCategory()
     {
         return $this->belongsTo(ProductCategory::class);
