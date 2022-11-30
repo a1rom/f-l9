@@ -18,18 +18,32 @@ class EnsureTokenIsValid
     {
         $token = $request->header('token');
         if ($token === null) {
+            $code = 400;
             return response()->json([
-                'message' => 'Token is missing',
-            ], 400);
+                'data' => $this->answerWithData('Token is missing', $code),
+            ], $code);
         }
 
         $user = \App\Models\User::where('api_token', $token)->first();
         if ($user === null) {
+            $code = 401;
             return response()->json([
-                'message' => 'Token is invalid',
-            ], 401);
+                'data' => $this->answerWithData('Token is invalid', $code),
+            ], $code);
         }
 
         return $next($request);
+    }
+
+    private function answerWithData($message, $code)
+    {
+        return
+            [
+                'type' => 'error',
+                'attributes' => [
+                    'code' => $code,
+                    'message' => $message,
+                ],
+            ];
     }
 }
