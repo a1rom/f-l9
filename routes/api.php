@@ -21,7 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::middleware(EnsureTokenIsValid::class)->group(function (){
+Route::middleware(EnsureTokenIsValid::class)->group(function () {
     Route::prefix(config('my.api_version'))->group(function () {
         Route::get('/products', [GetProductsController::class, 'index']);
     });
