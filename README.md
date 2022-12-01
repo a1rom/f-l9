@@ -1,5 +1,7 @@
 # CAFS2 Final Project
 
+https://github.com/a1rom/f-l9
+
 ## General Info
 
 This is a web application to store and maintain information about a warehouse. Get the todays information on the products stock based on the daily purchases and sales logs.
