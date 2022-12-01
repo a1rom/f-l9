@@ -27,7 +27,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::middleware(EnsureTokenIsValid::class)->group(function () {
-    Route::prefix(config('my.api_version'))->group(function () {
+    Route::prefix('v1')->group(function () {
         Route::prefix('products')->group(function () {
             Route::get('/', function () {
                 return ProductResourceJson::collection(Product::paginate(config('my.api_paginate')));
