@@ -31,6 +31,8 @@ class SupplierResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('name')
                     ->required()
+                    ->unique()
+                    ->alpha()
                     ->maxLength(191),
                 Forms\Components\TextInput::make('email')
                     ->email()
