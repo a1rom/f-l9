@@ -1,8 +1,12 @@
 <?php
 
-use App\Http\Controllers\MyController;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MyController;
+use App\Http\Resources\ProductResourceJson;
+use App\Http\Middleware\Api\EnsureTokenIsValid;
+use App\Http\Controllers\Api\GetProductsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,4 +23,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/my', MyController::class);
+Route::middleware(EnsureTokenIsValid::class)->group(function () {
+    Route::prefix(config('my.api_version'))->group(function () {
+        Route::get('/products', function () {
+            return ProductResourceJson::collection(Product::paginate(config('my.api_paginate')));
+        });
+
+        Route::get('/products/{id}', function ($id) {
+            return ProductResourceJson::make(Product::find($id));
+        });
+    });
+});
