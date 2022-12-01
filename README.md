@@ -13,4 +13,4 @@ Project is created with:
 ## References:
 
 ## Contact
-Any questions or suggestion, please send an email to dev@alrom.de
+dev@alrom.de
