@@ -64,7 +64,6 @@ class ProductResource extends Resource
                     ->searchable(isIndividual: true),
                 Tables\Columns\TextColumn::make('ean')
                     ->searchable(isIndividual: true),
-                Tables\Columns\TextColumn::make('description'),
                 Tables\Columns\TextColumn::make('created_at'),
                 Tables\Columns\TextColumn::make('updated_at'),
             ])
