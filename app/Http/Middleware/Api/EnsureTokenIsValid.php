@@ -20,7 +20,7 @@ class EnsureTokenIsValid
         if ($token === null) {
             $code = 400;
             return response()->json([
-                'data' => $this->answerWithData('Token is missing', $code),
+                'data' => answerWithData('Token is missing', $code),
             ], $code);
         }
 
@@ -28,22 +28,10 @@ class EnsureTokenIsValid
         if ($user === null) {
             $code = 401;
             return response()->json([
-                'data' => $this->answerWithData('Token is invalid', $code),
+                'data' => answerWithData('Token is invalid', $code),
             ], $code);
         }
 
         return $next($request);
-    }
-
-    private function answerWithData($message, $code)
-    {
-        return
-            [
-                'type' => 'error',
-                'attributes' => [
-                    'code' => $code,
-                    'message' => $message,
-                ],
-            ];
     }
 }

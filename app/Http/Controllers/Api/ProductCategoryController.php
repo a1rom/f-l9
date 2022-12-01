@@ -27,7 +27,7 @@ class ProductCategoryController extends Controller
         }
         $code = 404;
         return response()->json([
-            'data' => $this->answerWithData('Resource not found', $code),
+            'data' => answerWithData('Resource not found', $code),
         ], $code);
     }
 
@@ -38,24 +38,12 @@ class ProductCategoryController extends Controller
             $productCategory->delete();
             $code = 200;
             return response()->json([
-                'data' => $this->answerWithData('Resource deleted', $code),
+                'data' => answerWithData('Resource deleted', $code),
             ], $code);
         }
         $code = 404;
         return response()->json([
-            'data' => $this->answerWithData('Resource not found', $code),
+            'data' => answerWithData('Resource not found', $code),
         ], $code);
-    }
-
-    private function answerWithData($message, $code)
-    {
-        return
-            [
-                'type' => 'error',
-                'attributes' => [
-                    'code' => $code,
-                    'message' => $message,
-                ],
-            ];
     }
 }
