@@ -14,11 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('purchases', function (Blueprint $table) {
-            $table->id();
+            $table->snowflake('id')->primary();
             $table->date('date');
-            $table->foreignId('supplier_id')->constrained();
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('vat_id')->constrained();
+            $table->foreignSnowflake('supplier_id')->constrained();
+            $table->foreignSnowflake('user_id')->constrained();
+            $table->foreignSnowflake('vat_id')->constrained();
             $table->float('total_vat', 8, 2);
             $table->timestamps();
         });

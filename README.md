@@ -8,6 +8,7 @@ This is a web application to store and maintain information about a warehouse. G
 
 Project is created with:
 * Laravel 9
+* Snowflakes
 * Filament
 
 ## References:

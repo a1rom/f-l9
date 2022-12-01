@@ -14,9 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('purchases_items', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('purchase_id')->constrained();
-            $table->foreignId('product_id')->constrained();
+            $table->snowflake('id')->primary();
+            $table->foreignSnowflake('purchase_id')->constrained();
+            $table->foreignSnowflake('product_id')->constrained();
             $table->integer('quantity');
             $table->decimal('price_vat_excl', 8, 2);
             $table->timestamps();
