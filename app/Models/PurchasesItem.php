@@ -13,7 +13,6 @@ class PurchasesItem extends Model
 {
     use HasFactory;
     use Snowflakes;
-    use SnowflakeCast;
 
     protected $fillable = [
         'purchase_id',

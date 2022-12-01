@@ -11,7 +11,6 @@ class Product extends Model
 {
     use HasFactory;
     use Snowflakes;
-    use SnowflakeCast;
 
     protected $fillable = [
         'name',

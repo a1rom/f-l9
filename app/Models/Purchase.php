@@ -13,7 +13,6 @@ class Purchase extends Model
 {
     use HasFactory;
     use Snowflakes;
-    use SnowflakeCast;
 
     protected $fillable = [
         'date',

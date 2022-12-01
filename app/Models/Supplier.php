@@ -11,7 +11,6 @@ class Supplier extends Model
 {
     use HasFactory;
     use Snowflakes;
-    use SnowflakeCast;
 
     protected $fillable = [
         'name',
