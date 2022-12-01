@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('suppliers', function (Blueprint $table) {
-            $table->id();
+            $table->snowflake('id')->primary();
             $table->string('name');
             $table->string('company_code')->unique();
             $table->unsignedTinyInteger('status')->default(1);

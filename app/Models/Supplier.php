@@ -2,12 +2,16 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Snowflake\Snowflakes;
+use Snowflake\SnowflakeCast;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Supplier extends Model
 {
     use HasFactory;
+    use Snowflakes;
+    use SnowflakeCast;
 
     protected $fillable = [
         'name',
@@ -20,5 +24,9 @@ class Supplier extends Model
         'post_code',
         'country',
 
+    ];
+
+    protected $casts = [
+        'id' => SnowflakeCast::class,
     ];
 }

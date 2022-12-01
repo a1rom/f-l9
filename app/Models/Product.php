@@ -2,12 +2,16 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Snowflake\Snowflakes;
+use Snowflake\SnowflakeCast;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends Model
 {
     use HasFactory;
+    use Snowflakes;
+    use SnowflakeCast;
 
     protected $fillable = [
         'name',
@@ -19,6 +23,11 @@ class Product extends Model
 
     protected $with = [
         'productCategory',
+    ];
+
+    protected $casts = [
+        'id' => SnowflakeCast::class,
+        'product_category_id' => SnowflakeCast::class,
     ];
 
     public function productCategory()
