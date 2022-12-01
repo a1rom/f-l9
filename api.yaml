@@ -1,0 +1,466 @@
+openapi: 3.0.3
+info:
+  title: My App
+  description: |-
+    This is my training app
+
+    web link [http:://localhost](http://localhost)
+
+    _If you need additional assitance please get in touch via `inbox@alrom.de`_
+
+    Some useful points:
+    - point 1
+    - point 2
+  contact:
+    email: inbox@alrom.de
+  version: 1.0.0
+servers:
+  - url: http://localhost/api/v1
+tags:
+  - name: productCategories
+  - name: products
+paths:
+  /products:
+    get:
+      tags:
+        - products
+      summary: get all products
+      description: the list of all products, 10 records per page
+      parameters:
+        - name: token
+          in: header
+          description: valid api key
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/productItem'
+                  links:
+                    $ref: '#/components/schemas/paginationLinks'
+                  meta:
+                    $ref: '#/components/schemas/paginationMeta'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+    post:
+      tags:
+        - products
+      summary: create new product
+      requestBody:
+        description: Object with name
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/productItemCreate'
+      responses:
+        '201':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/productItem'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '422':
+          $ref: '#/components/responses/422'
+  /products/{id}:
+    put:
+      tags:
+        - products
+      summary: update a product
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: Object with arguments
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/productItemCreate'
+      responses:
+        '201':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/productItem'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '422':
+          $ref: '#/components/responses/422'
+    delete:
+      tags:
+        - products
+      summary: delete a category
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          $ref: '#/components/responses/deleted'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '422':
+          $ref: '#/components/responses/422'
+  /product-categories:
+    get:
+      tags:
+        - productCategories
+      summary: get all product categories
+      description: the list of all product categories, 10 records per page
+      parameters:
+        - name: token
+          in: header
+          description: valid api key
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/product_category'
+                  links:
+                    $ref: '#/components/schemas/paginationLinks'
+                  meta:
+                    $ref: '#/components/schemas/paginationMeta'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+    post:
+      tags:
+        - productCategories
+      summary: create new category
+      requestBody:
+        description: Object with name
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/productCategory'
+      responses:
+        '201':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/product_category'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '422':
+          $ref: '#/components/responses/422'
+  /product-categories/{id}:
+    put:
+      tags:
+        - productCategories
+      summary: update a category
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: Object with name
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/product_category'
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/product_category'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '422':
+          $ref: '#/components/responses/422'
+    delete:
+      tags:
+        - productCategories
+      summary: delete a category
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          $ref: '#/components/responses/deleted'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '422':
+          $ref: '#/components/responses/422'
+components:
+  schemas:
+    tokenMissing:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            type:
+              type: string
+              example: error
+            attributes:
+              type: object
+              properties:
+                status:
+                  type: integer
+                title:
+                  type: string
+              example:
+                status: 400
+                title: "Token is missing"
+    productItem:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        product_category:
+          $ref: '#/components/schemas/product_category'
+        sku:
+          type: string
+        ean:
+          type: string
+        description:
+          type: string
+      example:
+        id: 1
+        name: Product Name
+        product_category: {
+          id: 1,
+          name: Category of the products
+        }
+        sku: SKU-12345678
+        ean: '1234567890123'
+        description: Product long description, how to use and apply
+    productItemCreate:
+      type: object
+      properties:
+        name:
+          type: string
+        product_category:
+          type: integer
+        sku:
+          type: string
+        ean:
+          type: string
+        description:
+          type: string
+      required:
+        - name
+        - product_category
+        - sku
+        - ean
+    product_category:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+    productCategory:
+      type: object
+      properties:
+        name:
+          type: string
+    paginationLinks:
+      type: object
+      properties:
+        first:
+          type: string
+        last:
+          type: string
+        prev:
+          type: string
+        next:
+          type: string
+      example:
+        first: 'http://localhost:5010/api/v1/products?page=1'
+        last: 'http://localhost:5010/api/v1/products?page=7'
+        prev: null
+        next: 'http://localhost:5010/api/v1/products?page=2'
+    paginationMeta:
+      type: object
+      properties:
+        current_page:
+          type: integer
+          example: 1
+        from:
+          type: integer
+        last_page:
+          type: integer
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/paginationMetaLinks'
+        path:
+          type: string
+        per_page:
+          type: integer
+        to:
+          type: integer
+        total:
+          type: integer
+    paginationMetaLinks:
+      type: object
+      properties:
+        url:
+          type: string
+        label:
+          type: string
+        active:
+          type: boolean
+      example:
+        url: 'http://localhost:5010/api/v1/products?page=1'
+        label: '1'
+        active: true
+  responses:
+    '400':
+      description: Token is missing
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/tokenMissing'
+    '401':
+      description: Token is invalid
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    example: error
+                  attributes:
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                      title:
+                        type: string
+                    example:
+                      status: 401
+                      title: "Token is invalid"
+    '404':
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    example: error
+                  attributes:
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                      title:
+                        type: string
+                    example:
+                      status: 401
+                      title: "Resource not found"
+    '422':
+      description: The filed is required
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+              errors:
+                type: object
+                properties:
+                  value:
+                    type: string
+    deleted:
+      description: Successfully deleted
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    example: error
+                  attributes:
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                      title:
+                        type: string
+                    example:
+                      status: 200
+                      title: "Resource deleted"
+                      
