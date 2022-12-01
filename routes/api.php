@@ -32,16 +32,12 @@ Route::middleware(EnsureTokenIsValid::class)->group(function () {
             Route::get('/', function () {
                 return ProductResourceJson::collection(Product::paginate(config('my.api_paginate')));
             });
-
             Route::get('/{id}', function ($id) {
                 throw_if(!Product::find($id), NoResourcesExeption::class);
                 return ProductResourceJson::make(Product::find($id));
             });
-
             Route::post('/', [ProductController::class, 'store']);
-
             Route::put('/{id}', [ProductController::class, 'update']);
-
             Route::delete('/{id}', [ProductController::class, 'destroy']);
         });
 
@@ -49,21 +45,14 @@ Route::middleware(EnsureTokenIsValid::class)->group(function () {
             Route::get('/', function () {
                 return ProductCategoryResourceJson::collection(ProductCategory::paginate(config('my.api_paginate')));
             });
-
             Route::get('/{id}', function ($id) {
                 throw_if(!ProductCategory::find($id), NoResourcesExeption::class);
                 return ProductCategoryResourceJson::make(ProductCategory::find($id));
             });
-
             Route::post('/', [ProductCategoryController::class, 'store']);
-
             Route::put('/{id}', [ProductCategoryController::class, 'update']);
-
             Route::delete('/{id}', [ProductCategoryController::class, 'destroy']);
-
         });
-
-
     });
 });
 
