@@ -1,5 +1,6 @@
 <?php
 
+use App\Exceptions\NoResourcesExeption;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Models\ProductCategory;
@@ -33,6 +34,7 @@ Route::middleware(EnsureTokenIsValid::class)->group(function () {
             });
 
             Route::get('/{id}', function ($id) {
+                throw_if(!Product::find($id), NoResourcesExeption::class);
                 return ProductResourceJson::make(Product::find($id));
             });
 
@@ -49,6 +51,7 @@ Route::middleware(EnsureTokenIsValid::class)->group(function () {
             });
 
             Route::get('/{id}', function ($id) {
+                throw_if(!ProductCategory::find($id), NoResourcesExeption::class);
                 return ProductCategoryResourceJson::make(ProductCategory::find($id));
             });
 

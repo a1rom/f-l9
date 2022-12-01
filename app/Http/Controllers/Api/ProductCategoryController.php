@@ -19,25 +19,18 @@ class ProductCategoryController extends Controller
 
     public function update(ProductCategoryRequest $request)
     {
+        throw_if(!ProductCategory::find($request->id), NoResourcesExeption::class);
         $productCategory = ProductCategory::find($request->id);
-        if ($productCategory) {
-            $productCategory->update($request->validated());
-
-            return ProductCategoryResourceJson::make(ProductCategory::find($productCategory->id));
-        }
-        $code = 404;
-        return response()->json(answerWithData('Resource not found', $code), $code);
+        $productCategory->update($request->validated());
+        return ProductCategoryResourceJson::make(ProductCategory::find($productCategory->id));
     }
 
     public function destroy(Request $request)
     {
+        throw_if(!ProductCategory::find($request->id), NoResourcesExeption::class);
         $productCategory = ProductCategory::find($request->id);
-        if ($productCategory) {
-            $productCategory->delete();
-            $code = 200;
-            return response()->json(answerWithData('Resource deleted', $code), $code);
-        }
-        $code = 404;
-        return response()->json(answerWithData('Resource not found', $code), $code);
+        $productCategory->delete();
+        $code = 200;
+        return response()->json(answerWithData('Resource deleted', $code), $code);
     }
 }

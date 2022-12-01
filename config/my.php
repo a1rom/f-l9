@@ -15,5 +15,15 @@ return [
     */
 
     'api_version' => env('API_VERSION', 'v1'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | API Paginate
+    |--------------------------------------------------------------------------
+    |
+    | This value is the default number of items to paginate in the API.
+    |
+    */
+
     'api_paginate' => env('API_PAGINATE', 10),
 ];
