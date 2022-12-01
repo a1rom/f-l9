@@ -21,11 +21,16 @@ if (!function_exists('answerWithData')) {
             $type = 'warning';
         }
 
-        return [
-            'type' => $type,
-            'attributes' => [
-                'code' => $code,
-                'message' => $message,
+        return
+        [
+            'data' =>
+            [
+                'type' => $type,
+                'attributes' =>
+                [
+                    'code' => $code,
+                    'message' => $message,
+                ]
             ],
         ];
     }
