@@ -15,4 +15,5 @@ return [
     */
 
     'api_version' => env('API_VERSION', 'v1'),
+    'api_paginate' => env('API_PAGINATE', 10),
 ];
