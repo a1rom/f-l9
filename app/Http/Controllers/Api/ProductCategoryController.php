@@ -26,9 +26,7 @@ class ProductCategoryController extends Controller
             return ProductCategoryResourceJson::make(ProductCategory::find($productCategory->id));
         }
         $code = 404;
-        return response()->json([
-            'data' => answerWithData('Resource not found', $code),
-        ], $code);
+        return response()->json(answerWithData('Resource not found', $code), $code);
     }
 
     public function destroy(Request $request)
@@ -37,13 +35,9 @@ class ProductCategoryController extends Controller
         if ($productCategory) {
             $productCategory->delete();
             $code = 200;
-            return response()->json([
-                'data' => answerWithData('Resource deleted', $code),
-            ], $code);
+            return response()->json(answerWithData('Resource deleted', $code), $code);
         }
         $code = 404;
-        return response()->json([
-            'data' => answerWithData('Resource not found', $code),
-        ], $code);
+        return response()->json(answerWithData('Resource not found', $code), $code);
     }
 }

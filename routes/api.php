@@ -8,6 +8,7 @@ use App\Http\Resources\ProductResourceJson;
 use App\Http\Middleware\Api\EnsureTokenIsValid;
 use App\Http\Resources\ProductCategoryResourceJson;
 use App\Http\Controllers\Api\ProductCategoryController;
+use App\Http\Controllers\Api\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +35,12 @@ Route::middleware(EnsureTokenIsValid::class)->group(function () {
             Route::get('/{id}', function ($id) {
                 return ProductResourceJson::make(Product::find($id));
             });
+
+            Route::post('/', [ProductController::class, 'store']);
+
+            Route::put('/{id}', [ProductController::class, 'update']);
+
+            Route::delete('/{id}', [ProductController::class, 'destroy']);
         });
 
         Route::prefix('product-categories')->group(function () {
@@ -51,10 +58,12 @@ Route::middleware(EnsureTokenIsValid::class)->group(function () {
 
             Route::delete('/{id}', [ProductCategoryController::class, 'destroy']);
 
-            Route::fallback(function () {
-                return response()->json([
-                    'message' => 'Resource not found'], 404);
-            });
         });
+
+
     });
+});
+
+Route::fallback(function () {
+    return response()->json(answerWithData('Resource not found', 404), 404);
 });
