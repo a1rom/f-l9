@@ -13,7 +13,6 @@ class ProductCategoryController extends Controller
     public function store(ProductCategoryRequest $request)
     {
         $productCategory = ProductCategory::create($request->validated());
-
         return ProductCategoryResourceJson::make(ProductCategory::find($productCategory->id));
     }
 
